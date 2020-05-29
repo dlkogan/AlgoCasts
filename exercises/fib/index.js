@@ -8,6 +8,33 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+function memoizer(callbackfn) {
+  //NOTE, cache must be defined outside of the returned function
+  //THE CLOSURE ASPECT IS CRITICAL
+  const cache = {}
+  return function(...args) {
+    if(cache[args]) {
+      return cache[args]
+    }
+      //ensures the correct this context, and runs our function
+    let result = callbackfn.apply(this,args)
+    cache[args] = result;
+    return result;
+  }
+}
+
+function fib(n) {
+  //recursive solution
+  //track the last two values, shift
+  //base case, when n is 1
+  if(n < 2) {
+    return n
+  }
+  else {
+    return fib(n - 1) + fib(n - 2)
+  }
+}
+
+fib = memoizer(fib);
 
 module.exports = fib;
