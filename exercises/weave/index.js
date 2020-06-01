@@ -30,7 +30,7 @@ function weave(sourceOne, sourceTwo) {
   //if source1 has length, remove 1 add to output
   //if source2 has length, remove 1 add to output
   //keep doing this until both have no length
-  let outputQueue = new Queue;
+  let outputQueue = new Queue();
   while(sourceOne.peek() && sourceTwo.peek()) {
     if(sourceOne.peek()) {
       outputQueue.add(sourceOne.remove());

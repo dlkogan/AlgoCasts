@@ -14,6 +14,42 @@
 
 const Stack = require('./stack');
 
-class Queue {}
+class Queue {
+  //if we have two stacks...
+  constructor() {
+    this.stack1 = new Stack();
+    this.stack2 = new Stack();
+    //[1,2,3]
+    //[3,2,1]
+
+    /*
+    [1]
+    []
+    [1,2]
+    []
+    [1]
+    [2]
+
+    */
+  }
+  add(item) {
+    //we can add items to stack as normal, things are different when we return
+    this.stack1.push(item);
+  }
+  remove() {
+    //in here we need to reset stack 1 to reversed stack 2
+    while(this.stack1.peek()) {
+      this.stack2.push(this.stack1.pop());
+    }
+    let removed = this.stack2.pop();
+    while(this.stack2.peek()) {
+      this.stack1.push(this.stack2.pop());
+    }
+    return removed;
+  }
+  peek() {
+    return this.stack1.data[0];
+  }
+}
 
 module.exports = Queue;
