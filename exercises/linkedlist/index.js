@@ -92,7 +92,22 @@ class LinkedList {
     }
   }
   removeAt(ind) {
-
+    let currInd = 0;
+    let currNode = this.head;
+    let lastNode = currNode;
+    if(!currNode) return;
+    while(ind !== currInd && currNode) {
+      currInd++;
+      lastNode = currNode;
+      currNode = currNode.next;
+    }
+    if(ind === currInd) {
+      //if 0, currNode is node 1
+      //last node is node 1
+      lastNode.next = currNode.next;
+    } else {
+      return;
+    }
   }
 }
 
