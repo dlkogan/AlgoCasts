@@ -92,21 +92,51 @@ class LinkedList {
     }
   }
   removeAt(ind) {
-    let currInd = 0;
-    let currNode = this.head;
-    let lastNode = currNode;
-    if(!currNode) return;
-    while(ind !== currInd && currNode) {
-      currInd++;
-      lastNode = currNode;
-      currNode = currNode.next;
-    }
-    if(ind === currInd) {
-      //if 0, currNode is node 1
-      //last node is node 1
-      lastNode.next = currNode.next;
-    } else {
+    if(!this.head) {
       return;
+    }
+    if(ind === 0) {
+      this.head = this.head.next;
+      return;
+    }
+    else {
+      let removedNode = this.getAt(ind);
+      if(!removedNode) {
+        return;
+      }
+      let prevNode = this.getAt(ind - 1);
+      prevNode.next = removedNode.next;
+    }
+  }
+  insertAt(val, ind) {
+    let newNode = new Node(val);
+    if(!this.head) this.head = newNode;
+    if(ind === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    else {
+      let prevNode = this.getAt(ind - 1);
+      let nextNode = this.getAt(ind);
+      if(!nextNode) {
+        let lastNode = this.getLast();
+        lastNode.next = newNode;
+      } else {
+        newNode.next = nextNode;
+        prevNode.next = newNode;
+      }
+
+
+    }
+  }
+  forEach(callback) {
+    if(!this.head) return;
+    else {
+      let currNode = this.head;
+      while(currNode) {
+        callback(currNode);
+        currNode = currNode.next;
+      }
     }
   }
 }
